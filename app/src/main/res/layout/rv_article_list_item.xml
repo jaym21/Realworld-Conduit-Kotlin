@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/ivFeedAvatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        tools:background="@drawable/ic_face"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Abcd"
+        android:textSize="22sp"
+        android:textColor="@color/conduit_green_dark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ivFeedAvatar"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvArticleDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="March 4,2021"
+        android:textSize="15sp"
+        android:textColor="#A7ABAE"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        app:layout_constraintLeft_toRightOf="@id/ivFeedAvatar"
+        android:layout_marginStart="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/ivFeedAvatar"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TextView
+            android:id="@+id/tvArticleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Article Title"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvArticleBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Article Body"
+            android:textSize="18sp"
+            android:textColor="@color/conduit_grey"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
