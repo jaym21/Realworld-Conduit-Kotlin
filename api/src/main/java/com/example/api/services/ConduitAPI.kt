@@ -1,21 +1,27 @@
 package com.example.api.services
 
 import com.example.api.models.entities.UserCredentials
+import com.example.api.models.requests.LoginRequest
 import com.example.api.models.requests.SignUpRequest
+import com.example.api.models.responses.ArticleResponse
 import com.example.api.models.responses.ArticlesResponse
+import com.example.api.models.responses.TagsResponse
 import com.example.api.models.responses.UserResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
+//all these calls do not require authentication
 interface ConduitAPI {
 
     @POST("users")
     suspend fun signupUser(
         @Body userCredentials: SignUpRequest
     ): Response<UserResponse>
+
+    @POST("users/login")
+    suspend fun loginUser(
+        @Body userCredentials: LoginRequest
+    ): Response<LoginRequest>
 
     @GET("articles")
     suspend fun getArticles(
@@ -24,4 +30,12 @@ interface ConduitAPI {
         @Query("tag") tag: String? = null
 
     ): Response<ArticlesResponse>
+
+    @GET("articles/{slug}")
+    suspend fun getArticlesBySlug(
+        @Path("slug") slug: String
+    ): Response<ArticleResponse>
+
+    @GET("tags")
+    suspend fun getTags(): Response<TagsResponse>
 }

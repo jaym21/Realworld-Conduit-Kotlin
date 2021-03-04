@@ -1,6 +1,8 @@
 package com.example.api
 
+import com.example.api.models.entities.LoginData
 import com.example.api.models.entities.UserCredentials
+import com.example.api.models.requests.LoginRequest
 import com.example.api.models.requests.SignUpRequest
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
@@ -27,6 +29,21 @@ class ConduitClientTests {
         runBlocking {
             val response = conduitClient.api.signupUser(SignUpRequest(userCredentials))
             assertEquals(userCredentials.username, response.body()?.user?.username)
+        }
+    }
+
+    @Test
+    fun `POST users- login user`() {
+        //make a loginData that is present in the server
+        val loginData = LoginData(
+                "test${Random.nextInt(99, 999)}@email.com",
+                "pass${Random.nextInt(11111, 9999999)}"
+        )
+
+        //for coroutine functions
+        runBlocking {
+            val response = conduitClient.api.loginUser(LoginRequest(loginData))
+            assertEquals(loginData.email, response.body()?.user?.email)
         }
     }
 
@@ -57,6 +74,16 @@ class ConduitClientTests {
         runBlocking {
             val articles = conduitClient.api.getArticles(tag = "dragons")
             assertNotNull(articles.body()?.articles)
+        }
+    }
+
+    //testing to get tags
+    @Test
+    fun `GET Tags`() {
+        //for coroutine functions
+        runBlocking {
+            val tags = conduitClient.api.getTags()
+            assertNotNull(tags)
         }
     }
 }
