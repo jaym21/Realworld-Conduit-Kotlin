@@ -11,7 +11,7 @@ import com.example.realworldconduitkotlin.databinding.FragmentProfileBinding
 
 class Profile : Fragment() {
 
-    lateinit var binding: FragmentProfileBinding
+    private var binding: FragmentProfileBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -21,7 +21,11 @@ class Profile : Fragment() {
 
         
 
-        return binding.root
+        return binding?.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

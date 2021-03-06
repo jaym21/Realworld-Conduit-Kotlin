@@ -21,7 +21,7 @@ interface ConduitAPI {
     @POST("users/login")
     suspend fun loginUser(
         @Body userCredentials: LoginRequest
-    ): Response<LoginRequest>
+    ): Response<UserResponse>
 
     @GET("articles")
     suspend fun getArticles(

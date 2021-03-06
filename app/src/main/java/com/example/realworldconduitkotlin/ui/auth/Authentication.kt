@@ -10,7 +10,7 @@ import com.example.realworldconduitkotlin.databinding.FragmentAuthenticationBind
 
 class Authentication : Fragment() {
 
-    lateinit var binding: FragmentAuthenticationBinding
+    private var binding: FragmentAuthenticationBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,7 +21,11 @@ class Authentication : Fragment() {
 
 
 
-        return binding.root
+        return binding?.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

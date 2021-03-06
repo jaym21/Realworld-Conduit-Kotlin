@@ -10,7 +10,7 @@ import com.example.realworldconduitkotlin.databinding.FragmentSignUpBinding
 
 class SignUp : Fragment() {
 
-    lateinit var binding: FragmentSignUpBinding
+    private var binding: FragmentSignUpBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -20,7 +20,11 @@ class SignUp : Fragment() {
 
 
 
-        return binding.root
+        return binding?.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }
