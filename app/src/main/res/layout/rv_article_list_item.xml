@@ -17,23 +17,23 @@
         android:id="@+id/tvAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Abcd"
-        android:textSize="22sp"
+        android:fontFamily="@font/source_sans_pro_semibold"
         android:textColor="@color/conduit_green_dark"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="22sp"
         app:layout_constraintLeft_toRightOf="@id/ivFeedAvatar"
-        android:layout_marginStart="10dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Abcd" />
 
     <TextView
         android:id="@+id/tvArticleDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="March 4,2021"
-        android:textSize="15sp"
+        android:fontFamily="@font/source_sans_pro_light"
         android:textColor="#A7ABAE"
-        app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@id/ivFeedAvatar"
-        android:layout_marginStart="10dp"/>
+        app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        tools:text="March 4,2021" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,15 +46,17 @@
             android:id="@+id/tvArticleTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Article Title"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:textColor="@color/black"
             android:textSize="25sp"
-            android:textColor="@color/black"/>
+            tools:text="Article Title" />
 
         <TextView
             android:id="@+id/tvArticleBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Article Body"
+            android:fontFamily="@font/source_sans_pro_light"
             android:textSize="18sp"
             android:textColor="@color/conduit_grey"/>
 

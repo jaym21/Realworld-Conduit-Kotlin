@@ -1,11 +1,9 @@
 package com.example.realworldconduitkotlin.ui
 
-import android.os.Binder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.example.realworldconduitkotlin.R
 import com.example.realworldconduitkotlin.databinding.ActivityMainBinding
 
