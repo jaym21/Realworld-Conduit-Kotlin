@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel: ViewModel() {
 
-    private val _user = MutableLiveData<User>()
+    private val _user = MutableLiveData<User?>()
 
     //making user LiveData private so it cannot be edited from outside
-    val user: LiveData<User> =  _user
+    val user: LiveData<User?> =  _user
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
