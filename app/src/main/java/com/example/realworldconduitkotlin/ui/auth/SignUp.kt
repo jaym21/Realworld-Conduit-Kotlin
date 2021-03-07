@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.realworldconduitkotlin.databinding.ActivitySignInBinding
 import com.example.realworldconduitkotlin.databinding.ActivitySignUpBinding
+import com.example.realworldconduitkotlin.ui.MainActivity
 
 class SignUp: AppCompatActivity() {
 
@@ -27,6 +28,8 @@ class SignUp: AppCompatActivity() {
                 binding?.etEmailSignUp?.text.toString(),
                 binding?.etPasswordSignUp?.text.toString()
             )
+            val mainIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainIntent)
         }
 
         binding?.btnHaveAcc?.setOnClickListener {

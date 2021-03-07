@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.realworldconduitkotlin.databinding.ActivitySignInBinding
+import com.example.realworldconduitkotlin.ui.MainActivity
 
 class SignIn: AppCompatActivity() {
 
@@ -24,6 +25,8 @@ class SignIn: AppCompatActivity() {
                 binding?.etEmailSignIn?.text.toString(),
                 binding?.etPasswordSignIn?.text.toString()
             )
+            val mainIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainIntent)
         }
 
         binding?.btnNeedSignUp?.setOnClickListener {

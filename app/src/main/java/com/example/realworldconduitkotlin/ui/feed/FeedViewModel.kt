@@ -22,7 +22,6 @@ class FeedViewModel: ViewModel() {
             //posting the articles we got from api in created mutable list of LiveData
             ArticlesRepo.getGlobalFeed().body()?.articles.let { articles ->
                 _feed.postValue(articles)
-                Log.d("Feed", "Feed fetched with ${articles?.size} articles")
             }
         }
     }
@@ -30,7 +29,9 @@ class FeedViewModel: ViewModel() {
     //to fetch your feed for user from api
     fun fetchYourFeed() {
         viewModelScope.launch {
-
+            ArticlesRepo.getYourFeed().body()?.articles.let { articles ->
+                _feed.postValue(articles)
+            }
         }
     }
 }

@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Profile">
+    tools:context=".ui.Profile"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/ivProfileAvatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        tools:src="@drawable/ic_person"/>
+
     <TextView
+        android:id="@+id/tvProfileUsername"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        tools:text="Abc"
+        android:textSize="25sp"
+        android:gravity="center"/>
 
-</FrameLayout>
+
+</LinearLayout>

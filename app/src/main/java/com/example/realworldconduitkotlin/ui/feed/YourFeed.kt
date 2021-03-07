@@ -22,8 +22,6 @@ class YourFeed: Fragment() {
     private var binding: FragmentYourFeedBinding? = null
     lateinit var viewModel: FeedViewModel
     lateinit var feedAdapter: ArticleFeedRVAdapter
-    private val authViewModel: AuthViewModel by activityViewModels()
-    private var isLoggedIn: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

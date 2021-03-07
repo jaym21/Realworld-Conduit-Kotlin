@@ -16,19 +16,19 @@ object ConduitClient {
     var authToken: String? = null
 
     //setting authToken
-    val authInterceptor = Interceptor{chain ->
-        var req =  chain.request()
+    private val authInterceptor = Interceptor { chain ->
+        var req = chain.request()
         authToken?.let {
             req = req.newBuilder()
-                    .header("Authorization", "Token $it")
-                    .build()
+                .header("Authorization", "Token $it")
+                .build()
         }
         chain.proceed(req)
     }
 
     val okHttpBuilder = OkHttpClient.Builder()
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+        .readTimeout(5, TimeUnit.SECONDS)
+        .connectTimeout(2, TimeUnit.SECONDS)
 
     val retrofitBuilder = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -41,7 +41,7 @@ object ConduitClient {
             .create(ConduitAPI::class.java)
 
     val authApi = retrofitBuilder
-            .client(okHttpBuilder.build())
+            .client(okHttpBuilder.addInterceptor(authInterceptor).build())
             .build()
             .create(ConduitAuthAPI::class.java)
 }

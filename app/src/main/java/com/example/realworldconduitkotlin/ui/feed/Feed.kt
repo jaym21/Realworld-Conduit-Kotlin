@@ -1,10 +1,12 @@
 package com.example.realworldconduitkotlin.ui.feed
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -30,10 +32,13 @@ class Feed: Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentFeedBinding.inflate(inflater, container, false)
 
+        setUpTabLayout()
+
+
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
 
-        val user = authViewModel.user.value
-        updateLogInState(user)
+//        val user = authViewModel.user.value
+//        updateLogInState(user)
 
 
         binding?.ivUserAvatar?.setOnClickListener {
@@ -47,8 +52,9 @@ class Feed: Fragment() {
         return binding!!.root
     }
 
+
     private fun setUpTabLayout() {
-        val viewPagerAdapter = FeedViewPagerAdapter(requireFragmentManager())
+        val viewPagerAdapter = FeedViewPagerAdapter(childFragmentManager)
         viewPagerAdapter.addFragment(GlobalFeed(), "Global Feed")
         viewPagerAdapter.addFragment(YourFeed(), "Your Feed")
 
@@ -57,20 +63,20 @@ class Feed: Fragment() {
         binding?.tabsFeed?.setupWithViewPager(binding?.viewPagerFeed)
     }
 
-
-    private fun updateLogInState(user: User?) {
-        when(user) {
-            //user is logged in
-            is User -> {
-                Glide.with(this).load(user.image).into(binding?.ivUserAvatar!!)
-                isLoggedIn = true
-            }
-            //user is not logged in
-            else -> {
-                isLoggedIn = false
-            }
-        }
-    }
+//
+//    private fun updateLogInState(user: User?) {
+//        when(user) {
+//            //user is logged in
+//            is User -> {
+//                Glide.with(this).load(user.image).into(binding?.ivUserAvatar!!)
+//                isLoggedIn = true
+//            }
+//            //user is not logged in
+//            else -> {
+//                isLoggedIn = false
+//            }
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

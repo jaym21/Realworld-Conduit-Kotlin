@@ -5,8 +5,8 @@ import com.example.api.models.responses.ArticleResponse
 import com.example.api.models.responses.ArticlesResponse
 import com.example.api.models.responses.ProfileResponse
 import com.example.api.models.responses.UserResponse
+import retrofit2.Response
 import retrofit2.http.*
-import javax.xml.ws.Response
 
 interface ConduitAuthAPI {
 
