@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.api.models.entities.User
 import com.example.realworldconduitkotlin.adapters.ArticleFeedRVAdapter
-import com.example.realworldconduitkotlin.adapters.FeedViewPagerAdapter
 import com.example.realworldconduitkotlin.databinding.FragmentFeedBinding
+import com.example.realworldconduitkotlin.databinding.FragmentYourFeedBinding
 import com.example.realworldconduitkotlin.ui.auth.AuthViewModel
 import com.example.realworldconduitkotlin.ui.auth.SignIn
 
-class Feed: Fragment() {
+class YourFeed: Fragment() {
 
-    private var binding: FragmentFeedBinding? = null
+    private var binding: FragmentYourFeedBinding? = null
     lateinit var viewModel: FeedViewModel
     lateinit var feedAdapter: ArticleFeedRVAdapter
     private val authViewModel: AuthViewModel by activityViewModels()
@@ -28,47 +28,28 @@ class Feed: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = FragmentFeedBinding.inflate(inflater, container, false)
-
+        binding = FragmentYourFeedBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
 
-        val user = authViewModel.user.value
-        updateLogInState(user)
+
+        //initializing adapter and recyclerView
+        feedAdapter = ArticleFeedRVAdapter()
+        binding?.rvYourFeed?.layoutManager = LinearLayoutManager(context)
+        binding?.rvYourFeed?.adapter = feedAdapter
 
 
-        binding?.ivUserAvatar?.setOnClickListener {
-            if (!isLoggedIn) {
-                val loginIntent = Intent(context, SignIn::class.java)
-                startActivity(loginIntent)
-            }
-        }
 
 
-        return binding!!.root
-    }
+    return binding!!.root
+}
 
-    private fun setUpTabLayout() {
-        val viewPagerAdapter = FeedViewPagerAdapter(requireFragmentManager())
-        viewPagerAdapter.addFragment(GlobalFeed(), "Global Feed")
-        viewPagerAdapter.addFragment(YourFeed(), "Your Feed")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding?.viewPagerFeed?.adapter = viewPagerAdapter
-
-        binding?.tabsFeed?.setupWithViewPager(binding?.viewPagerFeed)
-    }
-
-
-    private fun updateLogInState(user: User?) {
-        when(user) {
-            //user is logged in
-            is User -> {
-                Glide.with(this).load(user.image).into(binding?.ivUserAvatar!!)
-                isLoggedIn = true
-            }
-            //user is not logged in
-            else -> {
-                isLoggedIn = false
-            }
+        //fetching the feed into recyclerView
+        viewModel.fetchYourFeed()
+        viewModel.feed.observe(viewLifecycleOwner) {
+            feedAdapter.submitList(it)
         }
     }
 

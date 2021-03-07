@@ -32,6 +32,7 @@ class SignIn: AppCompatActivity() {
         }
 
         authViewModel.user.observe({lifecycle}) {
+
             Toast.makeText(this, "Logged in as ${it?.username}", Toast.LENGTH_SHORT).show()
         }
 

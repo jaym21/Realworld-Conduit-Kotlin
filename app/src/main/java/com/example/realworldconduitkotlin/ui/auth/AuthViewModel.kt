@@ -18,8 +18,16 @@ class AuthViewModel: ViewModel() {
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
             //calling login function defined in user repository and passing entered email and password by user
-            UserRepo.login(email, password)?.let {
-                _user.postValue(it.user)
+            UserRepo.signin(email, password)?.let {
+                _user.postValue(it)
+            }
+        }
+    }
+
+    fun signupUser(username: String, email: String, password: String) {
+        viewModelScope.launch {
+            UserRepo.signup(username, email, password)?.let {
+                _user.postValue(it)
             }
         }
     }

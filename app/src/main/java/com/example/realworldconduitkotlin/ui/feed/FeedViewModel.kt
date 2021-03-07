@@ -16,14 +16,21 @@ class FeedViewModel: ViewModel() {
 
     val feed: LiveData<List<Article>> = _feed
 
-    //to fetch the feed from api
-    fun fetchFeed() {
+    //to fetch the global feed from api
+    fun fetchGlobalFeed() {
         viewModelScope.launch {
             //posting the articles we got from api in created mutable list of LiveData
-            ArticlesRepo.getFeed().body()?.articles.let { articles ->
+            ArticlesRepo.getGlobalFeed().body()?.articles.let { articles ->
                 _feed.postValue(articles)
                 Log.d("Feed", "Feed fetched with ${articles?.size} articles")
             }
+        }
+    }
+
+    //to fetch your feed for user from api
+    fun fetchYourFeed() {
+        viewModelScope.launch {
+
         }
     }
 }

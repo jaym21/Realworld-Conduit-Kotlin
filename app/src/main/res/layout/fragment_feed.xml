@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.feed.Feed"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.feed.GlobalFeed"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -32,10 +33,31 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFeed"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/rv_article_list_item"/>
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabsFeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/TabStyle"
+            app:tabInlineLabel="true"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/conduit_green"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerFeed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvFeed"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:listitem="@layout/rv_article_list_item"/>-->
 
 </LinearLayout>
