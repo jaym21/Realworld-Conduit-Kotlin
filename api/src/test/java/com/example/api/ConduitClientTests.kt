@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 class ConduitClientTests {
 
-    private val conduitClient = ConduitClient()
+
 
     //testing signUp user request to api
     @Test
@@ -27,7 +27,7 @@ class ConduitClientTests {
 
         //for coroutine functions
         runBlocking {
-            val response = conduitClient.publicApi.signupUser(SignUpRequest(userCredentials))
+            val response = ConduitClient.publicApi.signupUser(SignUpRequest(userCredentials))
             assertEquals(userCredentials.username, response.body()?.user?.username)
         }
     }
@@ -42,7 +42,7 @@ class ConduitClientTests {
 
         //for coroutine functions
         runBlocking {
-            val response = conduitClient.publicApi.loginUser(LoginRequest(loginData))
+            val response = ConduitClient.publicApi.loginUser(LoginRequest(loginData))
             assertEquals(loginData.email, response.body()?.user?.email)
         }
     }
@@ -52,7 +52,7 @@ class ConduitClientTests {
     fun `GET articles`() {
         //for coroutine functions
         runBlocking {
-            val articles = conduitClient.publicApi.getArticles()
+            val articles = ConduitClient.publicApi.getArticles()
             assertNotNull(articles.body()?.articles)
         }
     }
@@ -62,7 +62,7 @@ class ConduitClientTests {
     fun `GET articles by author`() {
         //for coroutine functions
         runBlocking {
-            val articles = conduitClient.publicApi.getArticles(author = "ilay")
+            val articles = ConduitClient.publicApi.getArticles(author = "ilay")
             assertNotNull(articles.body()?.articles)
         }
     }
@@ -72,7 +72,7 @@ class ConduitClientTests {
     fun `GET articles by tag`() {
         //for coroutine functions
         runBlocking {
-            val articles = conduitClient.publicApi.getArticles(tag = "dragons")
+            val articles = ConduitClient.publicApi.getArticles(tag = "dragons")
             assertNotNull(articles.body()?.articles)
         }
     }
@@ -82,7 +82,7 @@ class ConduitClientTests {
     fun `GET Tags`() {
         //for coroutine functions
         runBlocking {
-            val tags = conduitClient.publicApi.getTags()
+            val tags = ConduitClient.publicApi.getTags()
             assertNotNull(tags)
         }
     }

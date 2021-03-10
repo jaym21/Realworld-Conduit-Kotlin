@@ -2,10 +2,12 @@ package com.example.realworldconduitkotlin.data
 
 import com.example.api.ConduitClient
 import com.example.api.models.entities.LoginData
+import com.example.api.models.entities.UpdateUserData
 import com.example.api.models.entities.User
 import com.example.api.models.entities.UserCredentials
 import com.example.api.models.requests.LoginRequest
 import com.example.api.models.requests.SignUpRequest
+import com.example.api.models.requests.UpdateUserRequest
 
 object UserRepo {
 
@@ -28,5 +30,13 @@ object UserRepo {
 
         return response.body()?.user
     }
+
+    suspend fun updateUser(username: String?, email: String?, password: String?, bio: String?, image: String?): User? {
+        val response  = authApi.updateCurrentUser(UpdateUserRequest(UpdateUserData(bio, email, image, password, username)))
+
+        return response.body()?.user
+    }
+
+    suspend fun getUserProfile() = authApi.getCurrentUser().body()?.user
 
 }

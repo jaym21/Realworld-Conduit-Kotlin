@@ -11,4 +11,9 @@
         android:title="Profile"
         android:icon="@drawable/ic_person"/>
 
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+
 </menu>
