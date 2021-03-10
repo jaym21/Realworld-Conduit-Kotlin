@@ -15,6 +15,14 @@
             app:destination="@id/profile"
             app:enterAnim="@anim/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_feed_to_article"
+            app:destination="@id/article"
+            app:popUpTo="@id/feed" >
+
+            <argument android:name="@string/arg_article_id" app:argType="string"/>
+
+        </action>
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -32,4 +40,23 @@
         android:name="com.example.realworldconduitkotlin.ui.Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/article"
+        android:name="com.example.realworldconduitkotlin.ui.article.Article"
+        tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/yourFeed"
+        android:name="com.example.realworldconduitkotlin.ui.feed.YourFeed"
+        android:label="YourFeed" >
+
+        <action
+            android:id="@+id/action_yourFeed_to_article"
+            app:destination="@id/article"
+            app:popUpTo="@id/yourFeed" >
+
+            <argument android:name="@string/arg_article_id" app:argType="string"/>
+
+        </action>
+
+    </fragment>
 </navigation>

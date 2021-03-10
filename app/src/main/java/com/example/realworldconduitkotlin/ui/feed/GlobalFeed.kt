@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.realworldconduitkotlin.R
 import com.example.realworldconduitkotlin.adapters.ArticleFeedRVAdapter
 import com.example.realworldconduitkotlin.databinding.FragmentGlobalFeedBinding
 
@@ -26,7 +29,10 @@ class GlobalFeed : Fragment() {
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
 
         //initializing adapter and recyclerView
-        feedAdapter = ArticleFeedRVAdapter()
+        feedAdapter = ArticleFeedRVAdapter(object : ArticleFeedRVAdapter.OnArticleClickListener {
+            //calling fun openArticle on article clicked
+            override fun onArticleClicked(slug: String) = openArticle(slug)
+        })
         binding?.rvGlobalFeed?.layoutManager = LinearLayoutManager(context)
         binding?.rvGlobalFeed?.adapter = feedAdapter
 
@@ -44,7 +50,14 @@ class GlobalFeed : Fragment() {
         }
     }
 
-
+    fun openArticle(articleId: String) {
+        findNavController().navigate(
+            R.id.action_feed_to_article,
+            bundleOf(
+                resources.getString(R.string.arg_article_id) to articleId
+            )
+        )
+    }
 
     override fun onDestroy() {
         super.onDestroy()

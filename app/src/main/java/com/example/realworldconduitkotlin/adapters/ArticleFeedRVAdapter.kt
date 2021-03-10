@@ -8,10 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.api.models.entities.Article
 import com.example.realworldconduitkotlin.R
 
-class ArticleFeedRVAdapter: androidx.recyclerview.widget.ListAdapter<Article, ArticleFeedRVAdapter.ArticleViewHolder>(
+class ArticleFeedRVAdapter(val listener: OnArticleClickListener): androidx.recyclerview.widget.ListAdapter<Article, ArticleFeedRVAdapter.ArticleViewHolder>(
         object: DiffUtil.ItemCallback<Article>() {
     override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
         return oldItem == newItem
@@ -24,7 +25,10 @@ class ArticleFeedRVAdapter: androidx.recyclerview.widget.ListAdapter<Article, Ar
 }
 ) {
 
-
+    //to handle click on a article
+    interface OnArticleClickListener {
+        fun onArticleClicked(slug: String)
+    }
 
     inner class ArticleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val avatar: ImageView = itemView.findViewById(R.id.ivFeedAvatar)
@@ -44,6 +48,11 @@ class ArticleFeedRVAdapter: androidx.recyclerview.widget.ListAdapter<Article, Ar
         holder.title.text = article.title
         holder.body.text = article.body
         holder.date.text = article.createdAt
+        Glide.with(holder.itemView.context).load(article.author.image).into(holder.avatar)
+
+        holder.itemView.setOnClickListener {
+            listener.onArticleClicked(article.slug)
+        }
     }
 
 }

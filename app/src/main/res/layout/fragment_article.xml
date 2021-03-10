@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.article.Article"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#333"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvArticleFragTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Article Title"
+            android:textSize="30sp"
+            android:fontFamily="@font/source_sans_pro"
+            android:textColor="@color/white"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/ivArticleFragAvatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                tools:background="@drawable/ic_face"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/tvArticleFragAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_semibold"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    tools:text="Abcd"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvArticleFragArticleDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro_light"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:text="March 4,2021"
+                    android:layout_marginStart="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvArticleFragBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Article Body"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/source_sans_pro"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+
+</LinearLayout>

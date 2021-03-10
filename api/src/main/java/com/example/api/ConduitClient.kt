@@ -27,8 +27,8 @@ object ConduitClient {
     }
 
     val okHttpBuilder = OkHttpClient.Builder()
-        .readTimeout(5, TimeUnit.SECONDS)
-        .connectTimeout(2, TimeUnit.SECONDS)
+//        .readTimeout(5, TimeUnit.SECONDS)
+//        .connectTimeout(8, TimeUnit.SECONDS)
 
     val retrofitBuilder = Retrofit.Builder()
         .baseUrl(BASE_URL)

@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.api.models.entities.User
+import com.example.realworldconduitkotlin.R
 import com.example.realworldconduitkotlin.adapters.ArticleFeedRVAdapter
 import com.example.realworldconduitkotlin.databinding.FragmentFeedBinding
 import com.example.realworldconduitkotlin.databinding.FragmentYourFeedBinding
@@ -31,7 +34,10 @@ class YourFeed: Fragment() {
 
 
         //initializing adapter and recyclerView
-        feedAdapter = ArticleFeedRVAdapter()
+        feedAdapter = ArticleFeedRVAdapter(object : ArticleFeedRVAdapter.OnArticleClickListener {
+            //calling fun openArticle on article clicked
+            override fun onArticleClicked(slug: String) = openArticle(slug)
+        })
         binding?.rvYourFeed?.layoutManager = LinearLayoutManager(context)
         binding?.rvYourFeed?.adapter = feedAdapter
 
@@ -49,6 +55,15 @@ class YourFeed: Fragment() {
         viewModel.feed.observe(viewLifecycleOwner) {
             feedAdapter.submitList(it)
         }
+    }
+
+    fun openArticle(articleId: String) {
+        findNavController().navigate(
+            R.id.action_feed_to_article,
+            bundleOf(
+                resources.getString(R.string.arg_article_id) to articleId
+            )
+        )
     }
 
     override fun onDestroy() {

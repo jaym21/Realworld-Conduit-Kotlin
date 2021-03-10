@@ -48,8 +48,8 @@ class Settings : Fragment() {
                     etBio.text.toString(),
                     etURLProfileAvatar.text.toString()
                 )
+                Toast.makeText(context, "Updated your profile", Toast.LENGTH_SHORT).show()
             }
-            Toast.makeText(context, "Updated your profile", Toast.LENGTH_SHORT).show()
         }
     }
 
