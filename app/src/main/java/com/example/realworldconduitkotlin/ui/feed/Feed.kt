@@ -34,7 +34,7 @@ class Feed: Fragment() {
     private val authViewModel: AuthViewModel by activityViewModels()
     private var isLoggedIn: Boolean = false
     lateinit var sharedPreferences: SharedPreferences
-    lateinit var currentUser: User
+    private var currentUser: User? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -57,12 +57,16 @@ class Feed: Fragment() {
 
         authViewModel.user.observe({lifecycle}) {
             //setting currentUser object
-            currentUser = it!!
+            currentUser = it
             //if we get user i.e user is logged in
             it?.token?.let { token ->
                 //saving token in sharedPreferences
                 sharedPreferences.edit {
                     putString(PREFS_KEY_TOKEN, token)
+                }
+            } ?:  run {
+                sharedPreferences.edit {
+                    remove(PREFS_KEY_TOKEN)
                 }
             }
         }
@@ -73,7 +77,7 @@ class Feed: Fragment() {
                 val loginIntent = Intent(context, SignIn::class.java)
                 startActivity(loginIntent)
             }else {
-                binding?.ivUserAvatar!!.loadImage(currentUser.image!!)
+                binding?.ivUserAvatar!!.loadImage(currentUser?.image!!)
             }
         }
 

@@ -36,12 +36,6 @@ class SignUp: AppCompatActivity() {
             val signinIntent = Intent(this,  SignIn::class.java)
             startActivity(signinIntent)
         }
-
-        authViewModel.user.observe({lifecycle}) {
-            Toast.makeText(this, "Logged in as ${it?.username}", Toast.LENGTH_SHORT).show()
-        }
-
-
     }
 
     override fun onDestroy() {

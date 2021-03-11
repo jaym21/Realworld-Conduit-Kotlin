@@ -50,6 +50,10 @@ class Settings : Fragment() {
                 )
                 Toast.makeText(context, "Updated your profile", Toast.LENGTH_SHORT).show()
             }
+
+            btnLogout.setOnClickListener {
+                authViewModel.logout()
+            }
         }
     }
 
