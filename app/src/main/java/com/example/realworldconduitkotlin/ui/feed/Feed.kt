@@ -2,49 +2,78 @@ package com.example.realworldconduitkotlin.ui.feed
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.api.models.entities.User
 import com.example.realworldconduitkotlin.adapters.ArticleFeedRVAdapter
 import com.example.realworldconduitkotlin.adapters.FeedViewPagerAdapter
 import com.example.realworldconduitkotlin.databinding.FragmentFeedBinding
+import com.example.realworldconduitkotlin.extensions.loadImage
 import com.example.realworldconduitkotlin.ui.auth.AuthViewModel
 import com.example.realworldconduitkotlin.ui.auth.SignIn
 
+
 class Feed: Fragment() {
+
+    companion object {
+        const val PREFS_AUTH = "prefs_auth"
+        const val PREFS_KEY_TOKEN = "prefs_key_token"
+    }
 
     private var binding: FragmentFeedBinding? = null
     lateinit var viewModel: FeedViewModel
     lateinit var feedAdapter: ArticleFeedRVAdapter
     private val authViewModel: AuthViewModel by activityViewModels()
     private var isLoggedIn: Boolean = false
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var currentUser: User
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+
+        sharedPreferences = requireContext().getSharedPreferences(PREFS_AUTH, Context.MODE_PRIVATE)
+
         // Inflate the layout for this fragment
         binding = FragmentFeedBinding.inflate(inflater, container, false)
 
-        setUpTabLayout()
+        sharedPreferences.getString(PREFS_KEY_TOKEN, null)?.let {
+            authViewModel.getCurrentUser(it)
+            isLoggedIn = true
+        }
 
+        setUpTabLayout()
 
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
 
-//        val user = authViewModel.user.value
-//        updateLogInState(user)
+        authViewModel.user.observe({lifecycle}) {
+            //setting currentUser object
+            currentUser = it!!
+            //if we get user i.e user is logged in
+            it?.token?.let { token ->
+                //saving token in sharedPreferences
+                sharedPreferences.edit {
+                    putString(PREFS_KEY_TOKEN, token)
+                }
+            }
+        }
 
 
         binding?.ivUserAvatar?.setOnClickListener {
             if (!isLoggedIn) {
                 val loginIntent = Intent(context, SignIn::class.java)
                 startActivity(loginIntent)
+            }else {
+                binding?.ivUserAvatar!!.loadImage(currentUser.image!!)
             }
         }
 
@@ -63,20 +92,6 @@ class Feed: Fragment() {
         binding?.tabsFeed?.setupWithViewPager(binding?.viewPagerFeed)
     }
 
-//
-//    private fun updateLogInState(user: User?) {
-//        when(user) {
-//            //user is logged in
-//            is User -> {
-//                Glide.with(this).load(user.image).into(binding?.ivUserAvatar!!)
-//                isLoggedIn = true
-//            }
-//            //user is not logged in
-//            else -> {
-//                isLoggedIn = false
-//            }
-//        }
-//    }
 
     override fun onDestroy() {
         super.onDestroy()

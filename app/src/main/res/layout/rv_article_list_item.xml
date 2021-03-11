@@ -65,6 +65,12 @@
             android:textSize="18sp"
             android:textColor="@color/conduit_grey"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/conduit_grey"
+            android:layout_marginTop="8dp"/>
+
     </LinearLayout>
 
 

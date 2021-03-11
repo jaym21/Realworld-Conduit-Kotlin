@@ -39,4 +39,11 @@ object UserRepo {
 
     suspend fun getUserProfile() = authApi.getCurrentUser().body()?.user
 
+    suspend fun getCurrentUser(token: String): User? {
+
+        ConduitClient.authToken = token
+
+        return authApi.getCurrentUser().body()?.user
+    }
+
 }

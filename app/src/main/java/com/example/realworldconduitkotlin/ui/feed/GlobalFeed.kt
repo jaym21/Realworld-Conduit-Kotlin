@@ -8,18 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.realworldconduitkotlin.R
 import com.example.realworldconduitkotlin.adapters.ArticleFeedRVAdapter
 import com.example.realworldconduitkotlin.databinding.FragmentGlobalFeedBinding
+import com.example.realworldconduitkotlin.ui.auth.AuthViewModel
 
 class GlobalFeed : Fragment() {
 
     private var binding: FragmentGlobalFeedBinding? = null
     lateinit var viewModel: FeedViewModel
     lateinit var feedAdapter: ArticleFeedRVAdapter
+    private val authViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -27,6 +30,12 @@ class GlobalFeed : Fragment() {
         binding = FragmentGlobalFeedBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
+
+
+        authViewModel.user.observe({lifecycle}) {
+            Toast.makeText(context, "Logged in as ${it?.username}", Toast.LENGTH_SHORT).show()
+        }
+
 
         //initializing adapter and recyclerView
         feedAdapter = ArticleFeedRVAdapter(object : ArticleFeedRVAdapter.OnArticleClickListener {

@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.realworldconduitkotlin.R
 import com.example.realworldconduitkotlin.databinding.FragmentArticleBinding
+import com.example.realworldconduitkotlin.extensions.formatDate
+import com.example.realworldconduitkotlin.extensions.loadImage
 
 class Article : Fragment() {
 
@@ -44,9 +46,10 @@ class Article : Fragment() {
             binding?.apply {
                 tvArticleFragTitle.text = it.title
                 tvArticleFragAuthor.text = it.author.username
-                tvArticleFragArticleDate.text = it.createdAt
+                tvArticleFragArticleDate.formatDate(it.createdAt)
                 tvArticleFragBody.text = it.body
-                Glide.with(requireContext()).load(it.author.image).into(ivArticleFragAvatar)
+                //load image is function made as an extension of ImageView to load image using glide
+                ivArticleFragAvatar.loadImage(it.author.image, true)
             }
         }
     }

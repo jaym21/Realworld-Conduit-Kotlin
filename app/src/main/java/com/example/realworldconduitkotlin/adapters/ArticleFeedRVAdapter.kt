@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.api.models.entities.Article
 import com.example.realworldconduitkotlin.R
+import com.example.realworldconduitkotlin.extensions.formatDate
+import com.example.realworldconduitkotlin.extensions.loadImage
 
 class ArticleFeedRVAdapter(val listener: OnArticleClickListener): androidx.recyclerview.widget.ListAdapter<Article, ArticleFeedRVAdapter.ArticleViewHolder>(
         object: DiffUtil.ItemCallback<Article>() {
@@ -47,8 +49,8 @@ class ArticleFeedRVAdapter(val listener: OnArticleClickListener): androidx.recyc
         holder.author.text = article.author.username
         holder.title.text = article.title
         holder.body.text = article.body
-        holder.date.text = article.createdAt
-        Glide.with(holder.itemView.context).load(article.author.image).into(holder.avatar)
+        holder.date.formatDate(article.createdAt)
+        holder.avatar.loadImage(article.author.image, true)
 
         holder.itemView.setOnClickListener {
             listener.onArticleClicked(article.slug)

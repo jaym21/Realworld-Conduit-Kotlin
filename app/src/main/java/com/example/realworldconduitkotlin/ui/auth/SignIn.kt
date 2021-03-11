@@ -25,8 +25,8 @@ class SignIn: AppCompatActivity() {
                 binding?.etEmailSignIn?.text.toString(),
                 binding?.etPasswordSignIn?.text.toString()
             )
-            val mainIntent = Intent(this, MainActivity::class.java)
-            startActivity(mainIntent)
+//            val mainIntent = Intent(this, MainActivity::class.java)
+//            startActivity(mainIntent)
         }
 
         binding?.btnNeedSignUp?.setOnClickListener {
